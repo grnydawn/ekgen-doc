@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Simple MPI Example &mdash; ekgen 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Develper" href="../developer/index.html" />
+    <link rel="prev" title="Simple Region Example" href="simple-region.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ekgen
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Getting-started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel.html">Marking a kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/index.html">Sub-commands</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="simple-region.html">Simple Region Example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Simple MPI Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preparation">Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#files-in-the-example">Files in the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kgen-command-to-generate-a-kernel">KGen command to generate a kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-kernel">Running a kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-next">What’s next</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Develper</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ekgen</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Examples</a> &raquo;</li>
+        
+      <li>Simple MPI Example</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/examples/simple-MPI.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="simple-mpi-example">
+<h1>Simple MPI Example<a class="headerlink" href="#simple-mpi-example" title="Permalink to this headline">¶</a></h1>
+<p>This example is to explain how to generate a kernel from a block of source codes in a MPI program.
+This example can be found at $KGEN_HOME/examples/simple-MPI of KGen distribution.</p>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<p>If you have not installed KGen, please see <span class="xref std std-doc">Getting-started</span>.</p>
+<p>Following Linux utilities are required to use KGen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">make</span>      <span class="p">:</span> <span class="n">Software</span> <span class="n">builder</span>
+<span class="o">-</span> <span class="n">cpp</span>       <span class="p">:</span> <span class="n">C</span> <span class="n">preprocessor</span>
+<span class="o">-</span> <span class="n">strace</span>    <span class="p">:</span> <span class="n">System</span> <span class="n">call</span> <span class="n">tracer</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="files-in-the-example">
+<h2>Files in the example<a class="headerlink" href="#files-in-the-example" title="Permalink to this headline">¶</a></h2>
+<p>Following tree explains the files in this example.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$KGEN_HOME/examples/simple-region
+|
+|-- Makefile            : contains KGen command to generate a KGen kernel
+|-- README              : an introduction of the example
+`-- src                 : contains target software that a kernel will be generated from
+    |-- calc_mod.F90    : contains &quot;calc&quot; subroutine that is a target of kernel
+    |-- job.lsf         : contains batch command to run the software using IBM Platform LSF
+    |-- Makefile.lsf    : contains commands to build/run the software using IBM Platform LSF
+    |-- Makefile.mpirun : contains commands to build/run the software on a local machine using mpirun
+    |-- program.F90     : an entry of program
+    `-- update_mod.F90  : contains a call-site to the kernel subroutine in calc_mod.F90
+</pre></div>
+</div>
+</div>
+<div class="section" id="kgen-command-to-generate-a-kernel">
+<h2>KGen command to generate a kernel<a class="headerlink" href="#kgen-command-to-generate-a-kernel" title="Permalink to this headline">¶</a></h2>
+<p>When user runs “make” command in top directory of the example, following KGen command is executed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$KGEN_HOME/bin/kgen \
+    --cmd-clean &quot;cd src; make -f Makefile.mpirun clean&quot; \
+    --cmd-build &quot;cd src; make -f Makefile.mpirun build&quot; \
+    --cmd-run &quot;cd src; make -f Makefile.mpirun run&quot; \
+    src/update_mod.F90:update_mod:update:calc
+</pre></div>
+</div>
+<p><strong>NOTE</strong>: Several KGen options shown in the example of KGen distribution are omitted. The options are explained below.</p>
+<p>First three options in the command let KGen know how to <strong>“clean/build/run”</strong> the target software. The commands in this options can be any Linux command including ones from other complex building system such as CMake or GNU Automake. <strong>“clean”</strong> command is to make sure that all the source files required for KGen analysis will be actually compiled. <strong>“build”</strong> command is to build the software so that KGen collect CPP macros and file paths automatically. <strong>“run”</strong> command is to run the software that is built with KGen-instrumented source files so that KGen can automatically generate state input/output data that are used for kernel execution and verification. Please see <span class="xref std std-doc">User guide</span> for more details.</p>
+<p>The last line of the KGen command is a path to a source file and KGen “namepath”. KGen namepath is generally composed of module name, subprogram name and call target name. For example, in this example namepath to a callsite is “update_mod:update:calc”. Please see <span class="xref std std-doc">User guide</span> for more details.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MODULE update_mod
+    USE calc_mod, only : calc
+    PUBLIC update
+CONTAINS
+    SUBROUTINE update()
+        INTEGER :: i, j
+        real, dimension(ROW, COL) :: out2, out3, output
+        DO i=1, COL
+            DO j=1, ROW
+                CALL calc(i, j, output, out2, out3)     ! calling a subroutine of interest
+            END DO
+        END DO
+        print *, &#39;SUM(output) = &#39;, SUM(output)
+    END SUBROUTINE
+END MODULE
+</pre></div>
+</div>
+<p>Other options in the example of KGen distribution are explained below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">timing</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">100</span>                  <span class="p">:</span> <span class="n">repeats</span> <span class="n">kernel</span> <span class="n">execution</span> <span class="mi">100</span> <span class="n">times</span> <span class="n">to</span> <span class="n">increase</span> <span class="n">timing</span> <span class="n">measurment</span> <span class="n">resolution</span>
+<span class="o">--</span><span class="n">invocation</span> <span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span> <span class="p">:</span> <span class="n">generates</span> <span class="n">state</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">first</span> <span class="ow">and</span> <span class="n">third</span> <span class="n">invocations</span> <span class="n">of</span> <span class="n">MPI</span> <span class="n">rank</span> <span class="mi">0</span> <span class="ow">and</span> <span class="mi">1</span>
+<span class="o">--</span><span class="n">check</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1.0</span><span class="n">D</span><span class="o">-</span><span class="mi">14</span>            <span class="p">:</span> <span class="n">generates</span> <span class="n">failed</span> <span class="n">verification</span> <span class="k">if</span> <span class="n">kernel</span> <span class="n">output</span> <span class="ow">is</span> <span class="n">different</span> <span class="n">more</span> <span class="n">than</span> <span class="mf">1.0</span><span class="n">D</span><span class="o">-</span><span class="mi">14</span>
+<span class="o">--</span><span class="n">rebuild</span> <span class="nb">all</span>                        <span class="p">:</span> <span class="n">prevents</span> <span class="n">using</span> <span class="n">cached</span> <span class="n">information</span> <span class="kn">from</span> <span class="nn">previous</span> <span class="n">kernel</span> <span class="n">generation</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-a-kernel">
+<h2>Running a kernel<a class="headerlink" href="#running-a-kernel" title="Permalink to this headline">¶</a></h2>
+<p>Once a kernel is generated successfully, a kernel can be executed immediately as following.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cd</span> <span class="n">kernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">make</span>
+
+<span class="go">   ifort  -c -o kgen_utils.o kgen_utils.f90</span>
+<span class="go">   ifort  -c -o tprof_mod.o tprof_mod.f90</span>
+<span class="go">   ifort  -c -o calc_mod.o calc_mod.F90</span>
+<span class="go">   ifort  -c -o update_mod.o update_mod.F90</span>
+<span class="go">   ifort  -c -o kernel_driver.o kernel_driver.f90</span>
+<span class="go">   ifort    -o kernel.exe update_mod.o calc_mod.o kernel_driver.o kgen_utils.o tprof_mod.o</span>
+
+<span class="go">   ./kernel.exe</span>
+
+<span class="go">   ***************** Verification against &#39;calc.0.0.1&#39; *****************</span>
+
+<span class="go">   Number of output variables:            1</span>
+<span class="go">   Number of identical variables:            1</span>
+<span class="go">   Number of non-identical variables within tolerance:            0</span>
+<span class="go">   Number of non-identical variables out of tolerance:            0</span>
+<span class="go">   Tolerance:   1.000000000000000E-014</span>
+
+<span class="go">   Verification PASSED</span>
+
+<span class="go">   calc : Time per call (usec):   1.999999955296516E-002</span>
+
+<span class="go">   ***************** Verification against &#39;calc.0.0.3&#39; *****************</span>
+
+<span class="go">   ...</span>
+
+<span class="go">   ***************** Verification against &#39;calc.1.0.1&#39; *****************</span>
+
+<span class="go">   ...</span>
+
+<span class="go">   ***************** Verification against &#39;calc.1.0.3&#39; *****************</span>
+
+<span class="go">   ...</span>
+
+<span class="go">   ****************************************************</span>
+<span class="go">       kernel execution summary: calc</span>
+<span class="go">   ****************************************************</span>
+<span class="go">       Total number of verification cases  :     4</span>
+<span class="go">       Number of verification-passed cases :     4</span>
+
+<span class="go">       Average call time (usec):  0.125E-01</span>
+<span class="go">       Minimum call time (usec):  0.100E-01</span>
+<span class="go">       Maximum call time (usec):  0.200E-01</span>
+<span class="go">   ****************************************************</span>
+</pre></div>
+</div>
+<p>KGen generates kernel source files and utility files in “kernel” subdirectory. “Makefile” in the directory helps user to build/run the kernel conviniently.
+All KGen-generated kernels verify its output against state data generated from original software execution and provide verification results with detail information.</p>
+</div>
+<div class="section" id="what-s-next">
+<h2>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
+<p><span class="xref std std-doc">User guide</span></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../developer/index.html" class="btn btn-neutral float-right" title="Develper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="simple-region.html" class="btn btn-neutral float-left" title="Simple Region Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Youngsung Kim.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
